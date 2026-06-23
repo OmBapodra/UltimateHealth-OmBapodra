@@ -13,11 +13,11 @@ interface Props {
   onCancel: () => void;
 }
 
-const SecurityWarningModal: React.FC<Props> = ({
+const SecurityWarningModal = ({
   visible,
   onContinue,
   onCancel,
-}) => {
+}: Props) => {
   return (
     <Modal
       visible={visible}
@@ -35,12 +35,14 @@ const SecurityWarningModal: React.FC<Props> = ({
           </Text>
           <View style={styles.buttonRow}>
             <TouchableOpacity
+              accessibilityRole="button"
               style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
               accessibilityLabel="Cancel account creation">
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              accessibilityRole="button"
               style={[styles.button, styles.continueButton]}
               onPress={onContinue}
               accessibilityLabel="Acknowledge warning and continue">

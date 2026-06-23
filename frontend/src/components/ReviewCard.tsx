@@ -95,6 +95,8 @@ const ReviewCard = ({
 
           {/* Icon for more options */}
           <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel="More options"
             style={styles.shareIconContainer}
             onPress={() => {
               setMenuVisible(true)
@@ -136,6 +138,8 @@ const ReviewCard = ({
             </Text>
 
             <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel={`View review: ${item?.title}`}
               style={styles.viewInnnerContainer}
               onPress={() => {
                 onclick(item);

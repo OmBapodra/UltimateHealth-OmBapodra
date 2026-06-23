@@ -1,18 +1,18 @@
-import React, {useRef} from 'react';
-import {TouchableOpacity, Alert, StyleSheet, View} from 'react-native';
-import {YStack, XStack, Image, Text} from 'tamagui';
-import {Entypo, Ionicons} from '@expo/vector-icons';
-import {formatCount} from '../helper/Utils';
-import {Category} from '../type';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import React, { useRef } from 'react';
+import { TouchableOpacity, Alert, StyleSheet, View } from 'react-native';
+import { YStack, XStack, Image, Text } from 'tamagui';
+import { Entypo, Ionicons } from '@expo/vector-icons';
+import { formatCount } from '../helper/Utils';
+import { Category } from '../type';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import PodcastActions from './PodcastActions';
 import Share from 'react-native-share';
-import {GET_STORAGE_DATA} from '../helper/APIUtils';
-import {GlassStyles, ProfessionalColors, BorderRadius} from '../styles/GlassStyles';
-import {useSelector} from 'react-redux';
-import {useNavigation, useFocusEffect} from '@react-navigation/native';
+import { GET_STORAGE_DATA } from '../helper/APIUtils';
+import { GlassStyles, ProfessionalColors, BorderRadius } from '../styles/GlassStyles';
+import { useSelector } from 'react-redux';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { PODCAST_CARD } from '@/constants/podcastCard';
-import {getPlaybackPosition, PlaybackPosition} from '../helper/PlaybackManager';
+import { getPlaybackPosition, PlaybackPosition } from '../helper/PlaybackManager';
 
 interface PodcastProps {
   id: string;
@@ -48,7 +48,7 @@ const PodcastCard = ({
   playlistAct,
 }: PodcastProps) => {
   const sheetRef = useRef<BottomSheetModal>(null);
-  const {isGuest} = useSelector((state: any) => state.user);
+  const { isGuest } = useSelector((state: any) => state.user);
   const navigation = useNavigation<any>();
   const [progress, setProgress] = React.useState<PlaybackPosition | null>(null);
 
@@ -102,11 +102,16 @@ const PodcastCard = ({
       : 'https://t3.ftcdn.net/jpg/05/10/75/30/360_F_510753092_f4AOmCJAczuGgRLCmHxmowga2tC9VYQP.jpg';
 
   return (
-    <TouchableOpacity onPress={handleClick} activeOpacity={0.9} style={styles.cardWrapper}>
+    <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel={`Play podcast: ${title}`}
+      onPress={handleClick}
+      activeOpacity={0.9}
+      style={styles.cardWrapper}>
       <View style={[GlassStyles.glassCardElevated, styles.cardContainer]}>
         <View style={styles.imageContainer}>
           <Image
-            source={{uri}}
+            source={{ uri }}
             style={styles.coverImage}
             borderRadius={BorderRadius.lg}
           />
@@ -166,6 +171,8 @@ const PodcastCard = ({
 
         {display && !isGuest && (
           <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel="More options"
             style={[styles.menuButton, GlassStyles.glassContainer]}
             onPress={handleOpenSheet}
             activeOpacity={0.7}>
